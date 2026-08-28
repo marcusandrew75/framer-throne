@@ -2,6 +2,19 @@
 // Once the project is linked to a real Supabase instance, regenerate with:
 //   supabase gen types typescript --project-id <id> > src/lib/supabase/database.types.ts
 // and this file (plus this comment) goes away.
+//
+// `Relationships` is required on every Table/View by @supabase/postgrest-js's
+// GenericTable/GenericView constraint — omit it and the whole Database type
+// silently fails to satisfy GenericSchema, collapsing rpc()/query typing to
+// `never` with confusing downstream errors instead of a clear one here.
+
+type Relationship = {
+  foreignKeyName: string;
+  columns: string[];
+  isOneToOne?: boolean;
+  referencedRelation: string;
+  referencedColumns: string[];
+};
 
 export type Database = {
   public: {
@@ -20,6 +33,7 @@ export type Database = {
           created_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["categories"]["Insert"]>;
+        Relationships: [];
       };
       templates: {
         Row: {
@@ -43,6 +57,15 @@ export type Database = {
           created_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["templates"]["Insert"]>;
+        Relationships: [
+          {
+            foreignKeyName: "templates_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       rounds: {
         Row: {
@@ -52,10 +75,20 @@ export type Database = {
           ends_at: string;
           created_at: string;
         };
-        // No Insert type exported deliberately — rounds are only ever
-        // created through the `ensure_current_round` RPC, never a direct
-        // table insert (see 0001_init.sql: no insert policy on rounds).
+        // No real Insert type — rounds are only ever created through the
+        // `ensure_current_round` RPC, never a direct table insert (see
+        // 0001_init.sql: no insert policy on rounds).
+        Insert: never;
         Update: never;
+        Relationships: [
+          {
+            foreignKeyName: "rounds_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       bids: {
         Row: {
@@ -78,6 +111,22 @@ export type Database = {
         };
         // Bids are immutable and non-refundable by design — no Update type.
         Update: never;
+        Relationships: [
+          {
+            foreignKeyName: "bids_template_id_fkey";
+            columns: ["template_id"];
+            isOneToOne: false;
+            referencedRelation: "templates";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "bids_round_id_fkey";
+            columns: ["round_id"];
+            isOneToOne: false;
+            referencedRelation: "rounds";
+            referencedColumns: ["id"];
+          },
+        ];
       };
     };
     Views: {
@@ -89,6 +138,7 @@ export type Database = {
           score: number;
           first_bid_at: string | null;
         };
+        Relationships: [];
       };
       leaderboard: {
         Row: {
@@ -107,6 +157,7 @@ export type Database = {
           first_bid_at: string | null;
           rank: number;
         };
+        Relationships: [];
       };
     };
     Functions: {
@@ -123,3 +174,5 @@ export type Database = {
     CompositeTypes: Record<string, never>;
   };
 };
+
+export type { Relationship };

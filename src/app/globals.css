@@ -1,26 +1,128 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --bg: #f0eff4;
+  --surface: #fbfafd;
+  --surface-raised: #ffffff;
+  --ink: #1c1a2b;
+  --ink-soft: #55516f;
+  --ink-faint: #8783a0;
+  --line: #dad7e6;
+  --line-strong: #c2bed4;
+  --accent: #a9701f;
+  --accent-deep: #8c5a16;
+  --accent-soft: #f3e6d2;
+  --accent-ink: #ffffff;
+  --plum: #4a3b7c;
+  --plum-soft: #eae6f5;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --tile-1-bg: #f3e6d2;
+  --tile-1-ink: #8c5a16;
+  --tile-2-bg: #eae6f5;
+  --tile-2-ink: #4a3b7c;
+  --tile-3-bg: #e4ebe0;
+  --tile-3-ink: #4c6b43;
+  --tile-4-bg: #f3e1de;
+  --tile-4-ink: #9c4a3f;
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #14121f;
+    --surface: #1c1930;
+    --surface-raised: #221e38;
+    --ink: #edeaf7;
+    --ink-soft: #b0abcb;
+    --ink-faint: #78729a;
+    --line: #332c50;
+    --line-strong: #453b68;
+    --accent: #e0ac55;
+    --accent-deep: #f2c784;
+    --accent-soft: #3a2e1a;
+    --accent-ink: #1c1a2b;
+    --plum: #a79ae0;
+    --plum-soft: #26204a;
+
+    --tile-1-bg: #3a2e1a;
+    --tile-1-ink: #f2c784;
+    --tile-2-bg: #26204a;
+    --tile-2-ink: #a79ae0;
+    --tile-3-bg: #22301f;
+    --tile-3-ink: #8fb37f;
+    --tile-4-bg: #35201d;
+    --tile-4-ink: #d68477;
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-wrap: balance;
+  margin: 0;
+}
+
+code,
+.mono {
+  font-family: var(--font-mono);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
