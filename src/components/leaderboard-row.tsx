@@ -16,7 +16,6 @@ export function LeaderboardRow({ entry }: { entry: LeaderboardEntry }) {
       className="flex items-center gap-3 rounded-[3px] border border-[var(--line)] bg-[var(--surface)] p-3 transition-colors hover:border-[var(--line-strong)]"
     >
       <RankBadge rank={entry.rank} />
-      <TemplateTile title={entry.title} className="h-10 w-10 text-[14px]" />
 
       <div className="min-w-0 flex-1">
         <div className="truncate font-[family-name:var(--font-display)] text-[15px] font-semibold">
@@ -38,6 +37,12 @@ export function LeaderboardRow({ entry }: { entry: LeaderboardEntry }) {
           Bid $1
         </span>
       </div>
+
+      <TemplateTile
+        title={entry.title}
+        thumbnailUrl={entry.thumbnailUrl}
+        className="h-16 w-20 text-[22px]"
+      />
     </Link>
   );
 }

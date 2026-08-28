@@ -9,6 +9,9 @@ export type LeaderboardEntry = {
   authorHandle: string;
   totalBidCents: number;
   score: number;
+  /** No real screenshots yet for demo entries — TemplateTile falls back
+   * to the monogram tile when this is undefined. */
+  thumbnailUrl?: string | null;
 };
 
 const BID_LADDER = [50000, 10000, 5000, 1000, 500, 100];

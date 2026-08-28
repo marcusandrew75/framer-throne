@@ -32,7 +32,11 @@ export default async function TemplatePage(props: PageProps<"/t/[slug]">) {
       </Link>
 
       <div className="mt-5 flex items-center gap-4">
-        <TemplateTile title={entry.title} className="h-16 w-16 text-[22px]" />
+        <TemplateTile
+          title={entry.title}
+          thumbnailUrl={entry.thumbnailUrl}
+          className="h-16 w-16 text-[22px]"
+        />
         <div>
           <h1 className="text-[1.6rem] font-semibold">{entry.title}</h1>
           <p className="text-[14px] text-[var(--ink-faint)]">

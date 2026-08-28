@@ -42,6 +42,7 @@ export async function getLeaderboard(
         authorHandle: `#${row.author_id.slice(0, 8)}`,
         totalBidCents: row.total_bid_cents,
         score: row.score,
+        thumbnailUrl: row.thumbnail_url,
       })),
       isLive: true,
     };
