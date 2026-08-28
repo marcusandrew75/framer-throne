@@ -39,7 +39,7 @@ export default async function LeaderboardPage(
         {!isLive && (
           <span
             className="rounded-[3px] px-2 py-0.5 text-[11.5px] font-medium"
-            style={{ background: "var(--plum-soft)", color: "var(--plum)" }}
+            style={{ background: "var(--secondary-soft)", color: "var(--secondary)" }}
           >
             demo data — bidding isn&apos;t live yet
           </span>

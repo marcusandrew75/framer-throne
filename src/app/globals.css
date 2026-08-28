@@ -1,29 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f0eff4;
-  --surface: #fbfafd;
+  --bg: #eef1f6;
+  --surface: #fafbfd;
   --surface-raised: #ffffff;
-  --ink: #1c1a2b;
-  --ink-soft: #55516f;
-  --ink-faint: #8783a0;
-  --line: #dad7e6;
-  --line-strong: #c2bed4;
-  --accent: #a9701f;
-  --accent-deep: #8c5a16;
-  --accent-soft: #f3e6d2;
+  --ink: #151a24;
+  --ink-soft: #4c5769;
+  --ink-faint: #7c8598;
+  --line: #d7dde7;
+  --line-strong: #bfc8d9;
+  --accent: #1b4b8f;
+  --accent-deep: #123566;
+  --accent-soft: #dce6f5;
   --accent-ink: #ffffff;
-  --plum: #4a3b7c;
-  --plum-soft: #eae6f5;
+  --secondary: #3a6ea8;
+  --secondary-soft: #e3ebf6;
 
-  --tile-1-bg: #f3e6d2;
-  --tile-1-ink: #8c5a16;
-  --tile-2-bg: #eae6f5;
-  --tile-2-ink: #4a3b7c;
-  --tile-3-bg: #e4ebe0;
-  --tile-3-ink: #4c6b43;
-  --tile-4-bg: #f3e1de;
-  --tile-4-ink: #9c4a3f;
+  /* Four values/chromas of the same imperial-blue family, used only to
+     tell template monogram tiles apart — not brand chrome. */
+  --tile-1-bg: #dce6f5;
+  --tile-1-ink: #1b4b8f;
+  --tile-2-bg: #e3ebf6;
+  --tile-2-ink: #3a6ea8;
+  --tile-3-bg: #dceef0;
+  --tile-3-ink: #1f6e78;
+  --tile-4-bg: #e2e5f0;
+  --tile-4-ink: #37416b;
 
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
@@ -32,29 +34,29 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #14121f;
-    --surface: #1c1930;
-    --surface-raised: #221e38;
-    --ink: #edeaf7;
-    --ink-soft: #b0abcb;
-    --ink-faint: #78729a;
-    --line: #332c50;
-    --line-strong: #453b68;
-    --accent: #e0ac55;
-    --accent-deep: #f2c784;
-    --accent-soft: #3a2e1a;
-    --accent-ink: #1c1a2b;
-    --plum: #a79ae0;
-    --plum-soft: #26204a;
+    --bg: #0e141f;
+    --surface: #16202f;
+    --surface-raised: #1b2637;
+    --ink: #e9edf5;
+    --ink-soft: #a8b2c4;
+    --ink-faint: #7a8598;
+    --line: #2a3547;
+    --line-strong: #3b4a61;
+    --accent: #5b9bee;
+    --accent-deep: #9cc4f5;
+    --accent-soft: #16253f;
+    --accent-ink: #0e141f;
+    --secondary: #8fb8ec;
+    --secondary-soft: #1c2a3e;
 
-    --tile-1-bg: #3a2e1a;
-    --tile-1-ink: #f2c784;
-    --tile-2-bg: #26204a;
-    --tile-2-ink: #a79ae0;
-    --tile-3-bg: #22301f;
-    --tile-3-ink: #8fb37f;
-    --tile-4-bg: #35201d;
-    --tile-4-ink: #d68477;
+    --tile-1-bg: #16253f;
+    --tile-1-ink: #9cc4f5;
+    --tile-2-bg: #1c2a3e;
+    --tile-2-ink: #8fb8ec;
+    --tile-3-bg: #14282a;
+    --tile-3-ink: #6fc4ce;
+    --tile-4-bg: #232a44;
+    --tile-4-ink: #a8b0de;
   }
 }
 
