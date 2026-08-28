@@ -9,23 +9,26 @@
   --ink-faint: #7c8598;
   --line: #d7dde7;
   --line-strong: #bfc8d9;
-  --accent: #1b4b8f;
-  --accent-deep: #123566;
-  --accent-soft: #dce6f5;
+  --accent: #e01178;
+  --accent-deep: #a80a5c;
+  --accent-soft: #fbe1ef;
   --accent-ink: #ffffff;
-  --secondary: #3a6ea8;
-  --secondary-soft: #e3ebf6;
+  /* Quiet on purpose — the accent is the one loud color on the page;
+     secondary is a muted, desaturated echo of it, not a second pop. */
+  --secondary: #8a5c74;
+  --secondary-soft: #f2e7ed;
 
-  /* Four values/chromas of the same imperial-blue family, used only to
-     tell template monogram tiles apart — not brand chrome. */
-  --tile-1-bg: #dce6f5;
-  --tile-1-ink: #1b4b8f;
-  --tile-2-bg: #e3ebf6;
-  --tile-2-ink: #3a6ea8;
-  --tile-3-bg: #dceef0;
-  --tile-3-ink: #1f6e78;
-  --tile-4-bg: #e2e5f0;
-  --tile-4-ink: #37416b;
+  /* tile-1 mirrors the accent; the rest are quiet, low-saturation
+     neighbors — variety for template monograms without competing with
+     the one true accent color. */
+  --tile-1-bg: #fbe1ef;
+  --tile-1-ink: #a80a5c;
+  --tile-2-bg: #f2e7ed;
+  --tile-2-ink: #8a5c74;
+  --tile-3-bg: #eae7ef;
+  --tile-3-ink: #5c5470;
+  --tile-4-bg: #f0e6e0;
+  --tile-4-ink: #7a5a4a;
 
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
@@ -42,21 +45,21 @@
     --ink-faint: #7a8598;
     --line: #2a3547;
     --line-strong: #3b4a61;
-    --accent: #5b9bee;
-    --accent-deep: #9cc4f5;
-    --accent-soft: #16253f;
-    --accent-ink: #0e141f;
-    --secondary: #8fb8ec;
-    --secondary-soft: #1c2a3e;
+    --accent: #ff4fa0;
+    --accent-deep: #ff8cc6;
+    --accent-soft: #3a1428;
+    --accent-ink: #1a0a14;
+    --secondary: #c79bb0;
+    --secondary-soft: #2a1e26;
 
-    --tile-1-bg: #16253f;
-    --tile-1-ink: #9cc4f5;
-    --tile-2-bg: #1c2a3e;
-    --tile-2-ink: #8fb8ec;
-    --tile-3-bg: #14282a;
-    --tile-3-ink: #6fc4ce;
-    --tile-4-bg: #232a44;
-    --tile-4-ink: #a8b0de;
+    --tile-1-bg: #3a1428;
+    --tile-1-ink: #ff8cc6;
+    --tile-2-bg: #2a1e26;
+    --tile-2-ink: #c79bb0;
+    --tile-3-bg: #221f2c;
+    --tile-3-ink: #9089a8;
+    --tile-4-bg: #2a211c;
+    --tile-4-ink: #b08d74;
   }
 }
 
