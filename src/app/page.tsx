@@ -82,17 +82,17 @@ export default function HomePage() {
               {
                 n: "01",
                 title: "Submit once",
-                body: "List your template — title, category, a link to where people can buy it.",
+                body: "List your template — title, category, and a link to where people can buy it. It's free to submit, and you're eligible to be ranked right away.",
               },
               {
                 n: "02",
                 title: "Bid $1 or more",
-                body: "Bid any amount, starting at $1. Big spenders can't just skip ahead.",
+                body: "Anyone can bid on any template — you boosting your own, or a fan backing a favorite. The more someone spends, the less each extra dollar moves the needle, so a $1 bid still counts.",
               },
               {
                 n: "03",
                 title: "Rank resets weekly",
-                body: "Every Monday, every category starts back at zero. No bid buys a permanent crown.",
+                body: "Every Monday at 00:00 UTC, every category resets to zero — last week's bids don't carry over. There's always a fresh shot at #1.",
               },
             ].map((step) => (
               <div key={step.n}>
