@@ -16,8 +16,8 @@ export default function HomePage() {
             <p className="mono mb-5 text-[12px] font-medium tracking-[0.1em] text-[var(--accent-deep)] uppercase">
               For Framer template authors
             </p>
-            <h1 className="max-w-[15ch] text-[2.1rem] leading-[1.08] font-semibold tracking-tight sm:text-[2.75rem]">
-              A fairer way to get discovered.
+            <h1 className="max-w-[19ch] text-[2.1rem] leading-[1.08] font-semibold tracking-tight sm:text-[2.75rem]">
+              A fairer way to get your template discovered.
             </h1>
             <p className="mt-5 max-w-[46ch] text-[16.5px] leading-relaxed text-[var(--ink-soft)]">
               Bid $1 or more to rank your template — small bids get a real
