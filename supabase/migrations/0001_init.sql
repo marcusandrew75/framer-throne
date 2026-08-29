@@ -1,4 +1,4 @@
--- Framer Throne — core schema
+-- ThemeCrown — core schema
 -- Entities: categories, templates, rounds, bids (users live in auth.users)
 
 create extension if not exists "pgcrypto";

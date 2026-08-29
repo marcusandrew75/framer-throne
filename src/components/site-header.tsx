@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CrownMark } from "./crown-mark";
+import { FoxMascot } from "./fox-mascot";
 import { CATEGORIES } from "@/lib/categories";
 
 export function SiteHeader() {
@@ -10,8 +10,8 @@ export function SiteHeader() {
           href="/"
           className="flex shrink-0 items-center gap-2 font-[family-name:var(--font-display)] text-[17px] font-semibold tracking-tight"
         >
-          <CrownMark className="h-5 w-5 text-[var(--accent)]" />
-          Framer Throne
+          <FoxMascot className="h-7 w-7" />
+          ThemeCrown
         </Link>
 
         <nav

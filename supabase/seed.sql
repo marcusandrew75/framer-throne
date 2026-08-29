@@ -1,4 +1,4 @@
--- Framer Throne — launch categories
+-- ThemeCrown — launch categories
 
 insert into categories (slug, name) values
   ('saas', 'SaaS'),

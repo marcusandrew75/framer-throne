@@ -28,8 +28,8 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Framer Throne",
-    template: "%s · Framer Throne",
+    default: "ThemeCrown",
+    template: "%s · ThemeCrown",
   },
   description:
     "A pay-to-rank leaderboard for Framer template authors — built so a $1 bid still moves the needle.",

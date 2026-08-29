@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CrownMark } from "@/components/crown-mark";
+import { FoxMascot } from "@/components/fox-mascot";
 import { LeaderboardRow } from "@/components/leaderboard-row";
 import { CATEGORIES } from "@/lib/categories";
 import { DEMO_LEADERBOARDS } from "@/lib/demo-data";
@@ -20,9 +20,7 @@ export default function HomePage() {
               The marketplace stopped ranking fairly. This one does.
             </h1>
             <p className="mt-5 max-w-[46ch] text-[16.5px] leading-relaxed text-[var(--ink-soft)]">
-              From just $1, you can rank your template. Outspending someone
-              gets harder the higher they go — nobody can simply buy the top
-              spot.
+              Every template gets a fair shot at #1 — starting at $1.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
@@ -88,12 +86,12 @@ export default function HomePage() {
               {
                 n: "02",
                 title: "Bid $1 or more",
-                body: "Anyone can boost a listing — yours or someone else's. The more you spend, the less each extra dollar counts.",
+                body: "Bid any amount, starting at $1. Big spenders can't just skip ahead.",
               },
               {
                 n: "03",
                 title: "Rank resets weekly",
-                body: "Every Monday, every category starts back at zero. No bid buys a permanent throne.",
+                body: "Every Monday, every category starts back at zero. No bid buys a permanent crown.",
               },
             ].map((step) => (
               <div key={step.n}>
@@ -139,8 +137,8 @@ export default function HomePage() {
       {/* ---------- footer ---------- */}
       <footer className="border-t border-[var(--line)]">
         <div className="mx-auto flex max-w-[1160px] items-center gap-2 px-4 py-8 text-[13px] text-[var(--ink-faint)] sm:px-6">
-          <CrownMark className="h-4 w-4" />
-          Framer Throne
+          <FoxMascot className="h-5 w-5" />
+          ThemeCrown
         </div>
       </footer>
     </main>

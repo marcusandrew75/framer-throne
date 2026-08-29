@@ -1,4 +1,4 @@
--- Framer Throne — log-curve ranking
+-- ThemeCrown — log-curve ranking
 --
 -- score = ln(1 + total_bid_cents / 100)
 -- Rank = sort by score desc within category + round, ties broken by the

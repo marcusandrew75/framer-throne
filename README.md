@@ -1,7 +1,9 @@
-# Framer Throne
+# ThemeCrown
 
 A pay-to-rank leaderboard for Framer template authors, built so a $1 bid
-still moves the needle. See the [MVP spec](https://claude.ai/code/artifact/85a468a2-04c9-45a8-a2c6-06ef36da83b6)
+still moves the needle. (Formerly "Framer Throne" — renamed so the brand
+isn't locked to one marketplace, even though v1's schema and categories
+are still Framer-specific by design.) See the [MVP spec](https://claude.ai/code/artifact/85a468a2-04c9-45a8-a2c6-06ef36da83b6)
 for the full product design — this README only covers running the code.
 
 ## Stack
@@ -34,8 +36,12 @@ or views a category that week — there's no cron job to run.
 
 ## What's here vs. what's next
 
-This scaffold covers the schema, the ranking function (both verified
-against a real Postgres instance — see the migrations' inline comments),
-and the Supabase client wiring (`src/lib/supabase/`, `src/proxy.ts`). The
-actual pages from the spec — leaderboard, template profile, submit form,
-bid checkout, author/founder dashboards — aren't built yet.
+Built: the schema and ranking function (both verified against a real
+Postgres instance — see the migrations' inline comments), Supabase client
+wiring (`src/lib/supabase/`, `src/proxy.ts`), and the landing, category
+leaderboard, and template pages — all reading through `getLeaderboard()`,
+which falls back to demo data whenever Supabase isn't configured, so the
+app renders correctly before a project is linked.
+
+Not yet built: the submit-a-template form, the actual bid/Stripe
+checkout flow, and the author/founder dashboards from the spec.
