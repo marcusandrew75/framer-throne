@@ -17,10 +17,11 @@ export default function HomePage() {
               For Framer template authors
             </p>
             <h1 className="max-w-[15ch] text-[2.1rem] leading-[1.08] font-semibold tracking-tight sm:text-[2.75rem]">
-              The marketplace stopped ranking fairly. This one does.
+              A fairer way to get discovered.
             </h1>
             <p className="mt-5 max-w-[46ch] text-[16.5px] leading-relaxed text-[var(--ink-soft)]">
-              Every template gets a fair shot at #1 — starting at $1.
+              Bid $1 or more to rank your template — small bids get a real
+              shot, not just the biggest budgets.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
