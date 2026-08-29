@@ -20,9 +20,9 @@ export default function HomePage() {
               The marketplace stopped ranking fairly. This one does.
             </h1>
             <p className="mt-5 max-w-[46ch] text-[16.5px] leading-relaxed text-[var(--ink-soft)]">
-              Bid $1 or more to rank your template. A log curve means someone
-              else&apos;s fifth $100 barely beats your first $10 — visibility
-              isn&apos;t just about whoever has the deepest pockets.
+              From just $1, you can rank your template. Outspending someone
+              gets harder the higher they go — nobody can simply buy the top
+              spot.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
