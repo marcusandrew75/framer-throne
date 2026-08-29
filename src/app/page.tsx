@@ -88,7 +88,7 @@ export default function HomePage() {
               {
                 n: "02",
                 title: "Bid $1 or more",
-                body: "Anyone can boost a listing. Score grows with the log of the total, not the raw dollars.",
+                body: "Anyone can boost a listing — yours or someone else's. The more you spend, the less each extra dollar counts.",
               },
               {
                 n: "03",
