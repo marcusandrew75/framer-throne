@@ -91,7 +91,7 @@ export default async function HomePage() {
               {
                 n: "02",
                 title: "Bid $1 or more",
-                body: "Anyone can bid on any template — you boosting your own, or a fan backing a favorite. The more someone spends, the less each extra dollar moves the needle, so a $1 bid still counts.",
+                body: "Anyone can bid on any template — you boosting your own, or a fan backing a favorite. Every dollar goes straight into that template's own score, guaranteed — there's no prize pool and no one else's bid affects what yours gets you. The more someone spends, the less each extra dollar moves the needle, so a $1 bid still counts.",
               },
               {
                 n: "03",
