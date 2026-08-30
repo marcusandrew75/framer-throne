@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FoxMascot } from "./fox-mascot";
+import { MobileMenu } from "./mobile-menu";
 import { SignOutButton } from "./sign-out-button";
 import { CATEGORIES } from "@/lib/categories";
 import { getCurrentUser, isSupabaseConfigured } from "@/lib/auth";
@@ -9,6 +10,34 @@ export async function SiteHeader() {
   const configured = isSupabaseConfigured();
   const user = configured ? await getCurrentUser() : null;
   const persona = configured ? null : await getActivePersona();
+
+  const authSlot = configured ? (
+    user ? (
+      <SignOutButton />
+    ) : (
+      <Link
+        href="/login"
+        className="whitespace-nowrap text-[13px] text-[var(--ink-faint)] hover:text-[var(--ink)]"
+      >
+        Sign in
+      </Link>
+    )
+  ) : persona ? (
+    <Link
+      href="/login"
+      className="whitespace-nowrap text-[13px] text-[var(--ink-faint)] hover:text-[var(--ink)]"
+      title="Switch dummy user"
+    >
+      {persona.name} · Switch
+    </Link>
+  ) : (
+    <Link
+      href="/login"
+      className="whitespace-nowrap text-[13px] text-[var(--ink-faint)] hover:text-[var(--ink)]"
+    >
+      Sign in
+    </Link>
+  );
 
   return (
     <header className="sticky top-0 z-10 border-b border-[var(--line)] bg-[var(--bg)]/90 backdrop-blur">
@@ -23,7 +52,7 @@ export async function SiteHeader() {
 
         <nav
           aria-label="Categories"
-          className="no-scrollbar flex min-w-0 flex-1 items-center gap-1.5 overflow-x-auto"
+          className="no-scrollbar hidden min-w-0 flex-1 items-center gap-1.5 overflow-x-auto sm:flex"
         >
           {CATEGORIES.map((category) => (
             <Link
@@ -36,40 +65,18 @@ export async function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-3">
+        <div className="hidden shrink-0 items-center gap-3 sm:flex">
           <Link
             href="/submit"
             className="whitespace-nowrap text-[13.5px] font-medium text-[var(--ink)] hover:text-[var(--accent-deep)]"
           >
             Submit
           </Link>
-          {configured ? (
-            user ? (
-              <SignOutButton />
-            ) : (
-              <Link
-                href="/login"
-                className="whitespace-nowrap text-[13px] text-[var(--ink-faint)] hover:text-[var(--ink)]"
-              >
-                Sign in
-              </Link>
-            )
-          ) : persona ? (
-            <Link
-              href="/login"
-              className="whitespace-nowrap text-[13px] text-[var(--ink-faint)] hover:text-[var(--ink)]"
-              title="Switch dummy user"
-            >
-              {persona.name} · Switch
-            </Link>
-          ) : (
-            <Link
-              href="/login"
-              className="whitespace-nowrap text-[13px] text-[var(--ink-faint)] hover:text-[var(--ink)]"
-            >
-              Sign in
-            </Link>
-          )}
+          {authSlot}
+        </div>
+
+        <div className="ml-auto sm:hidden">
+          <MobileMenu categories={CATEGORIES} authSlot={authSlot} />
         </div>
       </div>
     </header>
