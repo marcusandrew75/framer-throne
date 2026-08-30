@@ -38,9 +38,12 @@ export default function HomePage() {
                 How it works
               </a>
             </div>
-            <p className="mt-4 text-[13px] text-[var(--ink-faint)]">
-              Submitting your own template opens soon.
-            </p>
+            <Link
+              href="/submit"
+              className="mt-4 inline-block text-[13px] text-[var(--ink-faint)] hover:text-[var(--ink)]"
+            >
+              Got a template? Submit it →
+            </Link>
           </div>
 
           <div className="rounded-[3px] border border-[var(--line)] bg-[var(--surface)] p-4 sm:p-5">

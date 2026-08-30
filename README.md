@@ -38,10 +38,12 @@ or views a category that week — there's no cron job to run.
 
 Built: the schema and ranking function (both verified against a real
 Postgres instance — see the migrations' inline comments), Supabase client
-wiring (`src/lib/supabase/`, `src/proxy.ts`), and the landing, category
-leaderboard, and template pages — all reading through `getLeaderboard()`,
-which falls back to demo data whenever Supabase isn't configured, so the
-app renders correctly before a project is linked.
+wiring (`src/lib/supabase/`, `src/proxy.ts`), the landing/leaderboard/
+template pages (reading through `getLeaderboard()`, which falls back to
+demo data whenever Supabase isn't configured), magic-link sign-in
+(`/login`, `/auth/callback`), and the submit-a-template flow (`/submit`)
+— author-only via RLS, also verified against a real Postgres instance.
 
-Not yet built: the submit-a-template form, the actual bid/Stripe
-checkout flow, and the author/founder dashboards from the spec.
+Not yet built: the actual bid/Stripe checkout flow, thumbnail file
+uploads (submit currently takes an image URL rather than a file), and
+the author/founder dashboards from the spec.

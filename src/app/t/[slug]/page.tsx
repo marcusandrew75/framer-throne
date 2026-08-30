@@ -4,19 +4,19 @@ import { notFound } from "next/navigation";
 import { RankBadge } from "@/components/rank-badge";
 import { TemplateTile } from "@/components/template-tile";
 import { categoryBySlug } from "@/lib/categories";
-import { findDemoEntry } from "@/lib/demo-data";
+import { getTemplateBySlug } from "@/lib/template";
 
 export async function generateMetadata(
   props: PageProps<"/t/[slug]">,
 ): Promise<Metadata> {
   const { slug } = await props.params;
-  const found = findDemoEntry(slug);
+  const found = await getTemplateBySlug(slug);
   return { title: found ? found.entry.title : "Template" };
 }
 
 export default async function TemplatePage(props: PageProps<"/t/[slug]">) {
   const { slug } = await props.params;
-  const found = findDemoEntry(slug);
+  const found = await getTemplateBySlug(slug);
   if (!found) notFound();
 
   const { entry, categorySlug } = found;

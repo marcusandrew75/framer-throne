@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { isSupabaseConfigured } from "@/lib/auth";
 import { DEMO_LEADERBOARDS, type LeaderboardEntry } from "@/lib/demo-data";
 
 export type LeaderboardResult = {
@@ -15,10 +16,7 @@ export type LeaderboardResult = {
 export async function getLeaderboard(
   categorySlug: string,
 ): Promise<LeaderboardResult> {
-  if (
-    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  ) {
+  if (!isSupabaseConfigured()) {
     return { entries: DEMO_LEADERBOARDS[categorySlug] ?? [], isLive: false };
   }
 

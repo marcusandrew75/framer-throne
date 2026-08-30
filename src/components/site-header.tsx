@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { FoxMascot } from "./fox-mascot";
+import { SignOutButton } from "./sign-out-button";
 import { CATEGORIES } from "@/lib/categories";
+import { getCurrentUser } from "@/lib/auth";
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const user = await getCurrentUser();
+
   return (
     <header className="sticky top-0 z-10 border-b border-[var(--line)] bg-[var(--bg)]/90 backdrop-blur">
       <div className="mx-auto flex max-w-[1160px] items-center gap-4 px-4 py-3 sm:px-6">
@@ -28,6 +32,25 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
+
+        <div className="flex shrink-0 items-center gap-3">
+          <Link
+            href="/submit"
+            className="whitespace-nowrap text-[13.5px] font-medium text-[var(--ink)] hover:text-[var(--accent-deep)]"
+          >
+            Submit
+          </Link>
+          {user ? (
+            <SignOutButton />
+          ) : (
+            <Link
+              href="/login"
+              className="whitespace-nowrap text-[13px] text-[var(--ink-faint)] hover:text-[var(--ink)]"
+            >
+              Sign in
+            </Link>
+          )}
+        </div>
       </div>
     </header>
   );
