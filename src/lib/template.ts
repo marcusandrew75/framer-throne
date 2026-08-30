@@ -1,7 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/auth";
 import { getLeaderboard } from "@/lib/leaderboard";
-import { findDemoEntry, type LeaderboardEntry } from "@/lib/demo-data";
+import { findSandboxEntry } from "@/lib/demo-sandbox";
+import type { LeaderboardEntry } from "@/lib/demo-data";
 
 export type TemplateLookup = {
   entry: LeaderboardEntry;
@@ -10,18 +11,19 @@ export type TemplateLookup = {
 };
 
 /**
- * Looks a template up by slug for the profile page — demo data first (so
- * the seeded examples keep working), then the real database. A freshly
- * submitted template has no bids yet, but it still shows up here: the
- * `leaderboard` view includes every template in its category at score 0.
+ * Looks a template up by slug for the profile page — the sandbox (base demo
+ * entries plus anything submitted/bid on locally) while Supabase isn't
+ * configured, the real database once it is. A freshly submitted template
+ * has no bids yet, but it still shows up here: both the sandbox and the
+ * real `leaderboard` view include every template in its category at score 0.
  */
 export async function getTemplateBySlug(
   slug: string,
 ): Promise<TemplateLookup | null> {
-  const demo = findDemoEntry(slug);
-  if (demo) return { ...demo, isLive: false };
-
-  if (!isSupabaseConfigured()) return null;
+  if (!isSupabaseConfigured()) {
+    const found = await findSandboxEntry(slug);
+    return found ? { ...found, isLive: false } : null;
+  }
 
   try {
     const supabase = await createClient();

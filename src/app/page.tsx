@@ -2,11 +2,12 @@ import Link from "next/link";
 import { FoxMascot } from "@/components/fox-mascot";
 import { LeaderboardRow } from "@/components/leaderboard-row";
 import { CATEGORIES } from "@/lib/categories";
-import { DEMO_LEADERBOARDS } from "@/lib/demo-data";
+import { getLeaderboard } from "@/lib/leaderboard";
 
-const PREVIEW_ENTRIES = DEMO_LEADERBOARDS.saas.slice(0, 4);
+export default async function HomePage() {
+  const { entries } = await getLeaderboard("saas");
+  const previewEntries = entries.slice(0, 4);
 
-export default function HomePage() {
   return (
     <main>
       {/* ---------- hero ---------- */}
@@ -56,7 +57,7 @@ export default function HomePage() {
               </span>
             </div>
             <div className="flex flex-col gap-2">
-              {PREVIEW_ENTRIES.map((entry) => (
+              {previewEntries.map((entry) => (
                 <LeaderboardRow key={entry.slug} entry={entry} />
               ))}
             </div>

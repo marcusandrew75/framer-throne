@@ -8,6 +8,7 @@ import { categoryBySlug } from "@/lib/categories";
 import { getTemplateBySlug } from "@/lib/template";
 import { getCurrentUser, isSupabaseConfigured } from "@/lib/auth";
 import { isStripeConfigured } from "@/lib/stripe";
+import { getActivePersona } from "@/lib/demo-sandbox";
 
 export async function generateMetadata(
   props: PageProps<"/t/[slug]">,
@@ -27,7 +28,9 @@ export default async function TemplatePage(props: PageProps<"/t/[slug]">) {
 
   const { entry, categorySlug } = found;
   const category = categoryBySlug(categorySlug);
-  const user = await getCurrentUser();
+  const configured = isSupabaseConfigured();
+  const user = configured ? await getCurrentUser() : null;
+  const persona = configured ? null : await getActivePersona();
 
   return (
     <main className="mx-auto max-w-[560px] px-4 py-10 sm:px-6 sm:py-14">
@@ -71,8 +74,9 @@ export default async function TemplatePage(props: PageProps<"/t/[slug]">) {
           style={{ borderColor: "var(--accent)", background: "var(--accent-soft)" }}
         >
           <p className="text-[14px] leading-relaxed" style={{ color: "var(--accent-deep)" }}>
-            Payment received — your bid will show up here in a moment once
-            it&apos;s confirmed.
+            {configured
+              ? "Payment received — your bid will show up here in a moment once it's confirmed."
+              : "Bid recorded in the sandbox — see it reflected in the rank above."}
           </p>
         </div>
       )}
@@ -85,13 +89,30 @@ export default async function TemplatePage(props: PageProps<"/t/[slug]">) {
       )}
 
       <div className="mt-8 rounded-[3px] border border-[var(--line)] bg-[var(--surface)] p-4">
-        {!isStripeConfigured() ? (
+        {!configured ? (
+          persona ? (
+            <BidForm slug={slug} />
+          ) : (
+            <>
+              <p className="text-[14px] leading-relaxed text-[var(--ink-soft)]">
+                Pick a dummy user to bid on {entry.title} in sandbox mode.
+              </p>
+              <Link
+                href={`/login?next=/t/${slug}`}
+                className="mt-4 inline-block rounded-[3px] px-5 py-3 text-[14.5px] font-medium"
+                style={{ background: "var(--accent)", color: "var(--accent-ink)" }}
+              >
+                Choose a dummy user
+              </Link>
+            </>
+          )
+        ) : !isStripeConfigured() ? (
           <p className="text-[14px] leading-relaxed text-[var(--ink-soft)]">
             Bidding isn&apos;t live yet — this is where you&apos;ll be able to
             put $1 or more behind {entry.title} and watch its rank move in
             real time.
           </p>
-        ) : !isSupabaseConfigured() || !user ? (
+        ) : !user ? (
           <>
             <p className="text-[14px] leading-relaxed text-[var(--ink-soft)]">
               Sign in to bid on {entry.title}.

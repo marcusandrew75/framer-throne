@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { getStripe, isStripeConfigured } from "@/lib/stripe";
+import { isSupabaseConfigured } from "@/lib/auth";
+import { getActivePersona } from "@/lib/demo-sandbox";
 
 export type BidState = { error?: string } | undefined;
 
@@ -18,18 +20,6 @@ export async function createBidCheckout(
   _prevState: BidState,
   formData: FormData,
 ): Promise<BidState> {
-  if (!isStripeConfigured()) {
-    return { error: "Bidding isn't live yet — Stripe isn't connected." };
-  }
-
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) {
-    return { error: "You need to sign in first." };
-  }
-
   const slug = String(formData.get("slug") ?? "");
   const amountCents = Number.parseInt(String(formData.get("amount_cents") ?? ""), 10);
 
@@ -40,6 +30,28 @@ export async function createBidCheckout(
     return {
       error: "That's more than we can take in one bid — try under $1,000.",
     };
+  }
+
+  if (!isSupabaseConfigured()) {
+    const persona = await getActivePersona();
+    if (!persona) {
+      return { error: "Pick a dummy user first." };
+    }
+    redirect(
+      `/demo-checkout?slug=${encodeURIComponent(slug)}&amount=${amountCents}`,
+    );
+  }
+
+  if (!isStripeConfigured()) {
+    return { error: "Bidding isn't live yet — Stripe isn't connected." };
+  }
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return { error: "You need to sign in first." };
   }
 
   const { data: template, error: templateError } = await supabase

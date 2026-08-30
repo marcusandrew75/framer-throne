@@ -79,12 +79,3 @@ export const DEMO_LEADERBOARDS: Record<string, LeaderboardEntry[]> = {
   ]),
 };
 
-export function findDemoEntry(
-  slug: string,
-): { entry: LeaderboardEntry; categorySlug: string } | undefined {
-  for (const [categorySlug, entries] of Object.entries(DEMO_LEADERBOARDS)) {
-    const entry = entries.find((e) => e.slug === slug);
-    if (entry) return { entry, categorySlug };
-  }
-  return undefined;
-}

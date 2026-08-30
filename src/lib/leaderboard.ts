@@ -1,23 +1,24 @@
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/auth";
-import { DEMO_LEADERBOARDS, type LeaderboardEntry } from "@/lib/demo-data";
+import { getSandboxLeaderboard } from "@/lib/demo-sandbox";
+import type { LeaderboardEntry } from "@/lib/demo-data";
 
 export type LeaderboardResult = {
   entries: LeaderboardEntry[];
-  /** false when this is placeholder content, e.g. Supabase isn't configured yet. */
+  /** false when this is sandbox content, e.g. Supabase isn't configured yet. */
   isLive: boolean;
 };
 
 /**
- * Live leaderboard for a category, falling back to demo content when
- * Supabase isn't configured or the query fails — so pages render correctly
- * before a project is wired up, rather than throwing.
+ * Live leaderboard for a category, falling back to the interactive sandbox
+ * when Supabase isn't configured or the query fails — so pages render
+ * correctly before a project is wired up, rather than throwing.
  */
 export async function getLeaderboard(
   categorySlug: string,
 ): Promise<LeaderboardResult> {
   if (!isSupabaseConfigured()) {
-    return { entries: DEMO_LEADERBOARDS[categorySlug] ?? [], isLive: false };
+    return { entries: await getSandboxLeaderboard(categorySlug), isLive: false };
   }
 
   try {
@@ -45,6 +46,6 @@ export async function getLeaderboard(
       isLive: true,
     };
   } catch {
-    return { entries: DEMO_LEADERBOARDS[categorySlug] ?? [], isLive: false };
+    return { entries: await getSandboxLeaderboard(categorySlug), isLive: false };
   }
 }

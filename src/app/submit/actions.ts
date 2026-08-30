@@ -3,6 +3,8 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { categoryBySlug } from "@/lib/categories";
+import { isSupabaseConfigured } from "@/lib/auth";
+import { addSandboxTemplate } from "@/lib/demo-sandbox";
 
 export type SubmitState = { error?: string } | undefined;
 
@@ -23,15 +25,6 @@ export async function submitTemplate(
   _prevState: SubmitState,
   formData: FormData,
 ): Promise<SubmitState> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return { error: "You need to sign in first." };
-  }
-
   const title = String(formData.get("title") ?? "").trim();
   const categorySlug = String(formData.get("category") ?? "");
   const url = String(formData.get("url") ?? "").trim();
@@ -50,6 +43,26 @@ export async function submitTemplate(
   }
   if (!confirmed) {
     return { error: "Confirm you own this template's listing." };
+  }
+
+  if (!isSupabaseConfigured()) {
+    const result = await addSandboxTemplate({
+      title,
+      categorySlug: category.slug,
+      url,
+      thumbnailUrl: thumbnailUrl || null,
+    });
+    if ("error" in result) return { error: result.error };
+    redirect(`/t/${result.slug}`);
+  }
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "You need to sign in first." };
   }
 
   const { data: categoryRow, error: categoryError } = await supabase

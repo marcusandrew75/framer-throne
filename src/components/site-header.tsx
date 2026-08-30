@@ -2,10 +2,13 @@ import Link from "next/link";
 import { FoxMascot } from "./fox-mascot";
 import { SignOutButton } from "./sign-out-button";
 import { CATEGORIES } from "@/lib/categories";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser, isSupabaseConfigured } from "@/lib/auth";
+import { getActivePersona } from "@/lib/demo-sandbox";
 
 export async function SiteHeader() {
-  const user = await getCurrentUser();
+  const configured = isSupabaseConfigured();
+  const user = configured ? await getCurrentUser() : null;
+  const persona = configured ? null : await getActivePersona();
 
   return (
     <header className="sticky top-0 z-10 border-b border-[var(--line)] bg-[var(--bg)]/90 backdrop-blur">
@@ -40,8 +43,25 @@ export async function SiteHeader() {
           >
             Submit
           </Link>
-          {user ? (
-            <SignOutButton />
+          {configured ? (
+            user ? (
+              <SignOutButton />
+            ) : (
+              <Link
+                href="/login"
+                className="whitespace-nowrap text-[13px] text-[var(--ink-faint)] hover:text-[var(--ink)]"
+              >
+                Sign in
+              </Link>
+            )
+          ) : persona ? (
+            <Link
+              href="/login"
+              className="whitespace-nowrap text-[13px] text-[var(--ink-faint)] hover:text-[var(--ink)]"
+              title="Switch dummy user"
+            >
+              {persona.name} · Switch
+            </Link>
           ) : (
             <Link
               href="/login"
