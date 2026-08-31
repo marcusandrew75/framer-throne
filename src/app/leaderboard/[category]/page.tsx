@@ -23,7 +23,7 @@ export default async function LeaderboardPage(
   const category = categoryBySlug(slug);
   if (!category) notFound();
 
-  const { entries, isLive } = await getLeaderboard(slug);
+  const { entries } = await getLeaderboard(slug);
 
   return (
     <main className="mx-auto max-w-[720px] px-4 py-10 sm:px-6 sm:py-14">
@@ -36,14 +36,6 @@ export default async function LeaderboardPage(
 
       <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-[var(--ink-faint)]">
         <span className="mono">resets every Monday, 00:00 UTC</span>
-        {!isLive && (
-          <span
-            className="rounded-[3px] px-2 py-0.5 text-[11.5px] font-medium"
-            style={{ background: "var(--secondary-soft)", color: "var(--secondary)" }}
-          >
-sandbox mode — bid with a dummy user to try it
-          </span>
-        )}
       </div>
 
       {entries.length === 0 ? (

@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
-import { isSupabaseConfigured } from "@/lib/auth";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -49,15 +48,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col">
         <SiteHeader />
-        {!isSupabaseConfigured() && (
-          <div
-            className="border-b border-[var(--line)] px-4 py-2 text-center text-[12.5px] font-medium"
-            style={{ background: "var(--secondary-soft)", color: "var(--secondary)" }}
-          >
-            🧪 Sandbox mode — nothing here is connected to a real database or
-            real payments.
-          </div>
-        )}
         <div className="flex-1">{children}</div>
       </body>
     </html>
