@@ -3,7 +3,7 @@ import { RankBadge } from "./rank-badge";
 import { TemplateTile } from "./template-tile";
 import type { LeaderboardEntry } from "@/lib/demo-data";
 
-function formatDollars(cents: number) {
+export function formatDollars(cents: number) {
   return cents % 100 === 0
     ? `$${cents / 100}`
     : `$${(cents / 100).toFixed(2)}`;
