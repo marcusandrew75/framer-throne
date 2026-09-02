@@ -29,7 +29,7 @@ export function TemplateTile({
       <img
         src={thumbnailUrl}
         alt=""
-        className={`shrink-0 rounded-[3px] object-cover ${sizeClasses}`}
+        className={`shrink-0 rounded-[3px] border border-[var(--line-strong)] object-cover ${sizeClasses}`}
       />
     );
   }
@@ -38,7 +38,11 @@ export function TemplateTile({
 
   return (
     <div
-      className={`flex shrink-0 items-center justify-center rounded-[3px] font-[family-name:var(--font-display)] font-semibold ${sizeClasses}`}
+      // One of the 4 hashed tile colors happens to equal the accent-soft
+      // background used behind the leaderboard's #1 spotlight card — without
+      // a border, that specific tile turns invisible (just a floating
+      // letter) whenever a title hashes to it.
+      className={`flex shrink-0 items-center justify-center rounded-[3px] border border-[var(--line-strong)] font-[family-name:var(--font-display)] font-semibold ${sizeClasses}`}
       style={{
         background: `var(--tile-${i}-bg)`,
         color: `var(--tile-${i}-ink)`,
